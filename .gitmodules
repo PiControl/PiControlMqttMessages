@@ -1,0 +1,3 @@
+[submodule "Sources/pi-control-mqtt-messages/protobuf"]
+	path = Sources/pi-control-mqtt-messages/protobuf
+	url = git@github.com:PiControl/pi-control-protobuf.git
