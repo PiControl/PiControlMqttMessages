@@ -10,7 +10,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "PiControlMqttMessages",
-            targets: ["pi-control-mqtt-messages"]),
+            targets: ["PiControlMqttMessages"]),
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-protobuf.git", from: "1.28.2")
