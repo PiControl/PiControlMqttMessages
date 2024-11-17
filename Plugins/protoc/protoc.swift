@@ -1,6 +1,6 @@
 //
 //  protoc.swift
-//  pi_control_coordinator
+//  pi-control-mqtt-messages
 //
 //  Created by Thomas Bonk on 05.11.24.
 //  Copyright 2024 Thomas Bonk

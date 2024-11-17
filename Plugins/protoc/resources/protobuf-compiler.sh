@@ -1,6 +1,6 @@
 #!/bin/sh
 #  protobuf-compiler.sh
-#  pi_control_coordinator
+#  pi-control-mqtt-messages
 #
 #  Created by Thomas Bonk on 06.11.24.
 #  Copyright 2024 Thomas Bonk
