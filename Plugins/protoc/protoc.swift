@@ -26,7 +26,10 @@ struct protoc: BuildToolPlugin {
     
     // MARK: - BuildToolPlugin
     func createBuildCommands(context: PackagePlugin.PluginContext, target: any PackagePlugin.Target) async throws -> [PackagePlugin.Command] {
-        let protoPath = target.directory.appending("protobuf")
+        fputs("********** directoryURL= \(context.package.directoryURL)", stderr)
+        
+        let protoPath = context.package.directoryURL.appending(component: "MessageDefinitions")
+        //let protoPath = target.directory.appending("protobuf")
         let outputDirectory = context.pluginWorkDirectoryURL
         
         return [
@@ -35,11 +38,11 @@ struct protoc: BuildToolPlugin {
                 executable: compilerPath(from: context),
                 arguments: merge(
                     [
-                        "--proto_path=\(protoPath.string)",
+                        "--proto_path=\(protoPath.path())",
                         "--swift_opt=Visibility=Public",
                         "--swift_out=\(outputDirectory.path)",
                     ],
-                    protobufFiles(target.directory.appending("protobuf"))
+                    protobufFiles(protoPath)
                 ),
                 environment: [:],
                 outputFilesDirectory: outputDirectory
@@ -64,17 +67,17 @@ struct protoc: BuildToolPlugin {
         return arrays.flatMap { $0 }
     }
     
-    private func protobufFiles(_ path: Path) -> [String] {
+    private func protobufFiles(_ url: URL) -> [String] {
         guard
-            let protobufFiles = try? FileManager.default.contentsOfDirectory(atPath: path.string)
+            let protobufFiles = try? FileManager.default.contentsOfDirectory(atPath: url.path())
         else {
             return []
         }
         
         return protobufFiles
             .filter { $0.hasSuffix(".proto") }
-            .map { path.appending(subpath: $0) }
-            .map { $0.string }
+            .map { url.appending(component: $0) }
+            .map { $0.path() }
     }
     
 }

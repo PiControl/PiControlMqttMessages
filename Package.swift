@@ -4,20 +4,6 @@
 import Foundation
 import PackageDescription
 
-func protobufResources() throws -> [PackageDescription.Resource] {
-    let packageDirectory = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
-    let protobufDirectory = packageDirectory
-        .appendingPathComponent("Sources")
-        .appendingPathComponent("pi-control-mqtt-messages")
-        .appendingPathComponent("protobuf")
-    let protobufFiles = try FileManager.default.contentsOfDirectory(at: protobufDirectory, includingPropertiesForKeys: [])
-    
-    return protobufFiles
-        //.filter { $0.pathExtension == "proto" }
-        .map { $0.lastPathComponent }
-        .map { PackageDescription.Resource.copy("protobuf/\($0)") }
-}
-
 let package = Package(
     name: "pi-control-mqtt-messages",
     products: [
@@ -37,7 +23,6 @@ let package = Package(
             dependencies: [
                 .product(name: "SwiftProtobuf", package: "swift-protobuf"),
             ],
-            resources: try protobufResources(),
             plugins: [
                 .plugin(name: "protoc")
             ]
