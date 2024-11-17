@@ -1,6 +1,6 @@
 //
-//  pi_control_mqtt_messages.swift
-//  pi-control-mqtt-messages
+//  PiControlMqttMessages.swift
+//  PiControlMqttMessages
 //
 //  Created by Thomas Bonk on 10.11.24.
 //  Copyright 2024 Thomas Bonk
